@@ -1,14 +1,20 @@
 from flask import Flask
-from flask_pymongo import PyMongo
+from flask_cors import CORS
+from dotenv import load_dotenv
+import os
 
-app= Flask(__name__)
-app.config['MONGO_URI']='mongodb://localhost:27017/pythonmongodb'
+from config.mongodb import mongo
+from routes.userRoutes import user
 
-mongo = PyMongo(app)
+config = load_dotenv()
 
-@app.route('/users',methods=['POST'])
-def create_user():
-    return {'mensage':'received'}
+app = Flask(__name__)
+CORS(app)
+
+app.config['MONGO_URI'] = os.getenv('MONGO_URI')
+mongo.init_app(app)
+
+app.register_blueprint(user, url_prefix='/users')
 
 if __name__ == '__main__':
-    app.run(debug=True)
+  app.run(debug=True)
