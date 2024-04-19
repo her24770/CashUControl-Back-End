@@ -22,7 +22,6 @@ def isAdmin(token,output=False):
         if output:
             return decode(token, key=getenv("SECRET"), algorithms=["HS256"])
         user = decode(token, key=getenv("SECRET"), algorithms=["HS256"])
-        print(user['role'])
         if not user['role'] == 'ADMIN':
             return jsonify({"message": "NO tiene permisos para esta opcion"})
     except exceptions.DecodeError:
@@ -33,3 +32,6 @@ def isAdmin(token,output=False):
         response = jsonify({"message": "Token ya espiro"})
         response.status_code = 401
         return response
+
+def userForToken(token):
+    return decode(token, key=getenv("SECRET"), algorithms=["HS256"])

@@ -3,9 +3,11 @@ from bson import json_util, ObjectId
 from jwt import encode, decode
 from config.validate import *
 from config.jwt import create_token
+from config.authenticated import userForToken
 from config.mongodb import mongo
 import json
 
+#funcion para validar logueo
 def login():
     data = request.get_json()
     msg = dataRequired(data, ['email', 'password'])
@@ -17,10 +19,10 @@ def login():
     if user:
         if checkPassword(password, user['password']):
             token = create_token(user)
-            return jsonify({ 'user': user,'token':token})
-    response = jsonify({"message": "Credenciales incorrectas"})
-    return response
+            return jsonify({ 'user': user,'token':token}) 
+    return jsonify({"message": "Credenciales incorrectas"})
 
+#funcion agregar usuario
 def register():
     userNew = request.get_json()
     #campos vacios
@@ -38,21 +40,71 @@ def register():
         return jsonify({'message':'Add succesfully'})
     return jsonify({'message':'Email en uso'})
     
-
+#funcion listar todos usuarios
 def getAll():
     users = json_util.dumps(mongo.db.users.find())
     return Response(users, mimetype='application/json')
 
+#funcion buscar perfil por id
 def getProfile(id):
     user = json_util.dumps(mongo.db.users.find_one({'_id': ObjectId(id)}))
     return Response(user, mimetype='application/json')
 
+#funcion para actualizar
+def updateProfile(id):
+    dataUpdate = request.get_json()
+    userExist = mongo.db.users.find_one({'_id': ObjectId(id)})
+    #vaildacion que el usuario existe en bd
+    if userExist is None:
+        return jsonify({'message':'Usuario no existe'})
+    #validar que el email no se repota en bd
+    userEmail = mongo.db.users.find_one({'email': dataUpdate['email']})
+    if not userExist['email']== dataUpdate['email']:
+        if not userEmail is None:
+            return jsonify({'message:':'Email ya esta en uso'})
+    #validar permisos de admin y actualizacion de perfil propio para usuario
+    user = userForToken(request.headers['Authorization'].split(" ")[1])
+    if not user['role'] == 'ADMIN':
+        if not eval(user['id'])['$oid'] == id:
+            return jsonify({'message':'No tiene autorizado hacer esta acción'})
+    #actualizar usuario
+    mongo.db.users.update_one({'_id': ObjectId(id)},
+                                {'$set': {
+                                  'email': dataUpdate['email'],
+                                  'name': dataUpdate['name'],
+                                  'surname': dataUpdate['surname'],
+                                  'carnet': dataUpdate['carnet']
+                            }})
+    return jsonify({'message:':'Update successfully'})
 
+#funcion para actualizar contraseña
+def updatePassword(id):
+    dataUpdate = request.get_json()
+    userExist = mongo.db.users.find_one({'_id': ObjectId(id)})
+    #vaildacion que el usuario existe en bd
+    if userExist is None:
+        return jsonify({'message':'Usuario no existe'})
+    #validar permisos de admin y actualizacion de perfil propio para usuario
+    user = userForToken(request.headers['Authorization'].split(" ")[1])
+    if not eval(user['id'])['$oid'] == id:
+        return jsonify({'message':'No tiene autorizado hacer esta acción'})
+    #validar campos vacios
+    msg = dataRequired(dataUpdate, ['newPassword', 'password'])
+    if msg: 
+        return msg
+    #validar que sea su contraseña 
+    if not checkPassword(dataUpdate['password'], userExist['password']):
+        return jsonify({'message': 'Contraseña incorrecta'})
+    #actualizar password
+    newPassword = encrypt(dataUpdate['newPassword'])
+    mongo.db.users.update_one({'_id': ObjectId(id)},
+                                {'$set': {'password': newPassword}})
+    return jsonify({'message:':'Update successfully'})
+
+#deleteProfile, initAdmin ,delete       
 def delete(id):
-    response = mongo.db.users.delete_one({'_id': ObjectId(id)})
-    if response.deleted_count >= 1:
-        return 'User deleted successfully', 200
-    else:
-        return 'User not found', 404
-    
-#deleteÑrofile, updateProfile, initAdmin, update,delete
+    userExist = mongo.db.users.find_one({'_id': ObjectId(id)})
+    if userExist is None:
+        return jsonify({'message':'Usuario no existe'})
+    mongo.db.users.delete_one({'_id': id})
+    return jsonify({'message': 'Delete successfully'})
