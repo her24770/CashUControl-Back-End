@@ -36,6 +36,7 @@ def register():
     #no se repita email
     if userfind is None: 
         userNew['role'] = 'USER'
+        print(userNew)
         mongo.db.users.insert_one(userNew)
         return jsonify({'message':'Add succesfully'})
     return jsonify({'message':'Email en uso'})
@@ -62,9 +63,10 @@ def updateProfile(id):
     if not userExist['email']== dataUpdate['email']:
         if not userEmail is None:
             return jsonify({'message:':'Email ya esta en uso'})
-    #validar permisos de admin y actualizacion de perfil propio para usuario
+    #validar permisos de admin y actualizacion de perfil propio para usuario y cambio de rol
     user = userForToken(request.headers['Authorization'].split(" ")[1])
     if not user['role'] == 'ADMIN':
+        dataUpdate['role'] = userExist['role']
         if not eval(user['id'])['$oid'] == id:
             return jsonify({'message':'No tiene autorizado hacer esta acción'})
     #actualizar usuario
@@ -73,7 +75,8 @@ def updateProfile(id):
                                   'email': dataUpdate['email'],
                                   'name': dataUpdate['name'],
                                   'surname': dataUpdate['surname'],
-                                  'carnet': dataUpdate['carnet']
+                                  'carnet': dataUpdate['carnet'],
+                                  'role': dataUpdate['role']
                             }})
     return jsonify({'message:':'Update successfully'})
 
@@ -101,10 +104,32 @@ def updatePassword(id):
                                 {'$set': {'password': newPassword}})
     return jsonify({'message:':'Update successfully'})
 
-#deleteProfile, initAdmin ,delete       
+#funcion para eliminar usuario con validaciones de role y profile      
 def delete(id):
+    #validar que exista
     userExist = mongo.db.users.find_one({'_id': ObjectId(id)})
     if userExist is None:
         return jsonify({'message':'Usuario no existe'})
-    mongo.db.users.delete_one({'_id': id})
+    #validar que este autorizado por role y mismo perfil
+    user = userForToken(request.headers['Authorization'].split(" ")[1])
+    if not user['role'] == 'ADMIN':
+        if not eval(user['id'])['$oid'] == id:
+            return jsonify({'message':'No tiene autorizado hacer esta acción'})
+    #eliminar
+    mongo.db.users.delete_one({'_id': ObjectId(id)})
     return jsonify({'message': 'Delete successfully'})
+
+#agregar admin por defecto
+def initAdmin():
+    userfind = mongo.db.users.find_one({'email': 'ADMIN'})
+    if userfind is None:
+        password = str(encrypt('123'))
+        mongo.db.users.insert_one({
+            'email': 'ADMIN', 
+            'name': 'ADMIN', 
+            'surname': 'ADMIN', 
+            'carnet': 'ADMIN', 
+            'password': password, 
+            'role': 'ADMIN'})
+
+#token
