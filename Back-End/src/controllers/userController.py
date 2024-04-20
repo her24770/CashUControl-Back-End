@@ -48,8 +48,10 @@ def getAll():
 
 #funcion buscar perfil por id
 def getProfile(id):
-    user = json_util.dumps(mongo.db.users.find_one({'_id': ObjectId(id)}))
-    return Response(user, mimetype='application/json')
+    user = mongo.db.users.find_one({'_id': ObjectId(id)})
+    if user is None:
+        return jsonify({'message':'Usuario no existe'})
+    return Response(json_util.dumps(user), mimetype='application/json')
 
 #funcion para actualizar
 def updateProfile(id):
@@ -131,5 +133,3 @@ def initAdmin():
             'carnet': 'ADMIN', 
             'password': password, 
             'role': 'ADMIN'})
-
-#token
