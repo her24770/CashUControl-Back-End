@@ -36,7 +36,6 @@ def register():
     #no se repita email
     if userfind is None: 
         userNew['role'] = 'USER'
-        print(userNew)
         mongo.db.users.insert_one(userNew)
         return jsonify({'message':'Add succesfully'})
     return jsonify({'message':'Email en uso'})
@@ -66,11 +65,11 @@ def updateProfile(id):
         if not userEmail is None:
             return jsonify({'message:':'Email ya esta en uso'})
     #validar permisos de admin y actualizacion de perfil propio para usuario y cambio de rol
-    user = userForToken(request.headers['Authorization'].split(" ")[1])
-    if not user['role'] == 'ADMIN':
-        dataUpdate['role'] = userExist['role']
-        if not eval(user['id'])['$oid'] == id:
-            return jsonify({'message':'No tiene autorizado hacer esta acción'})
+    # user = userForToken(request.headers['Authorization'].split(" ")[1])
+    # if not user['role'] == 'ADMIN':
+    #     dataUpdate['role'] = userExist['role']
+    #     if not eval(user['id'])['$oid'] == id:
+    #         return jsonify({'message':'No tiene autorizado hacer esta acción'})
     #actualizar usuario
     mongo.db.users.update_one({'_id': ObjectId(id)},
                                 {'$set': {
@@ -80,7 +79,7 @@ def updateProfile(id):
                                   'carnet': dataUpdate['carnet'],
                                   'role': dataUpdate['role']
                             }})
-    return jsonify({'message:':'Update successfully'})
+    return jsonify({'message':'Update successfully'})
 
 #funcion para actualizar contraseña
 def updatePassword(id):
@@ -90,9 +89,9 @@ def updatePassword(id):
     if userExist is None:
         return jsonify({'message':'Usuario no existe'})
     #validar permisos de admin y actualizacion de perfil propio para usuario
-    user = userForToken(request.headers['Authorization'].split(" ")[1])
-    if not eval(user['id'])['$oid'] == id:
-        return jsonify({'message':'No tiene autorizado hacer esta acción'})
+    #user = userForToken(request.headers['Authorization'].split(" ")[1])
+    #if not eval(user['id'])['$oid'] == id:
+    #    return jsonify({'message':'No tiene autorizado hacer esta acción'})
     #validar campos vacios
     msg = dataRequired(dataUpdate, ['newPassword', 'password'])
     if msg: 
@@ -104,7 +103,7 @@ def updatePassword(id):
     newPassword = encrypt(dataUpdate['newPassword'])
     mongo.db.users.update_one({'_id': ObjectId(id)},
                                 {'$set': {'password': newPassword}})
-    return jsonify({'message:':'Update successfully'})
+    return jsonify({'message':'Update successfully'})
 
 #funcion para eliminar usuario con validaciones de role y profile      
 def delete(id):
@@ -129,7 +128,7 @@ def initAdmin():
         mongo.db.users.insert_one({
             'email': 'ADMIN', 
             'name': 'ADMIN', 
-            'surname': 'ADMIN', 
+            'surname': 'DEFAULT', 
             'carnet': 'ADMIN', 
             'password': password, 
             'role': 'ADMIN'})

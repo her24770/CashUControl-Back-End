@@ -13,12 +13,14 @@ user.add_url_rule('/update/<id>',view_func=updateProfile,methods=['PUT'])
 user.add_url_rule('/updatePassword/<id>',view_func=updatePassword,methods=['PUT'])
 
 ## rutas con validacion de token
-endpoints_permitidos = ['users.getAll', 'users.delete', 'users.updateProfile', 'users.updatePassword']
+#endpoints_permitidos = ['users.getAll', 'users.delete', 'users.updateProfile', 'users']
+endpoints_permitidos = []
 @user.before_request
 def verify_token_middleware():
-    #registrados
     if request.endpoint in endpoints_permitidos:
-        return ensureAuth(request.headers['Authorization'].split(" ")[1],output=False)
+         print("hola")
+         print(request.headers['Authorization'])
+         return ensureAuth(request.headers['Authorization'].split(" ")[1],output=False)
     #ADMIN
-    if request.endpoint == 'users.getProfile':
+    if request.endpoint == 'users.jijija':
         return isAdmin(request.headers['Authorization'].split(" ")[1],output=False)
