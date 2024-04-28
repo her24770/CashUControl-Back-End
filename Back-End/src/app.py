@@ -5,6 +5,12 @@ import os
 
 from config.mongodb import mongo
 from routes.userRoutes import user
+from routes.ingresosRoutes import ingresos
+from routes.egresosRoutes import egresos
+from routes.metasRoutes import metas
+from routes.recompensasRoutes import recompensas
+from routes.consejosRoutes import consejos
+
 from controllers.userController import initAdmin
 
 config = load_dotenv()
@@ -19,6 +25,11 @@ mongo.init_app(app)
 
 #Rutas
 app.register_blueprint(user, url_prefix='/users')
+app.register_blueprint(ingresos, url_prefix='/ingresos')
+app.register_blueprint(egresos, url_prefix='/egresos')
+app.register_blueprint(metas, url_prefix='/metas')
+app.register_blueprint(recompensas, url_prefix='/recompensas')
+app.register_blueprint(consejos, url_prefix='/consejos')
 
 #funciones
 initAdmin()

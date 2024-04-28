@@ -48,7 +48,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"email\": \"ADMIN\",\n    \"password\": \"123\"\n}",
+							"raw": "{\n\t\"email\": \"ADMIN\",\n    \"password\": \"1\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -192,7 +192,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6InsnJG9pZCc6ICc2NjIzMGE3NjU4MjZjZmMzODk3NjMyZjknfSIsImVtYWlsIjoiQURNSU4iLCJyb2xlIjoiQURNSU4iLCJleHAiOjE3MTM2NDAyMDZ9.F_esIlfBPseRnZSFLvLMI0eK_iOYng0tzUF6LIbt9u8",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6InsnJG9pZCc6ICc2NjI4MDYyODU2YmYyNDJhNmQ4ODg5NTQnfSIsImVtYWlsIjoiQURNSU4iLCJyb2xlIjoiQURNSU4iLCJleHAiOjE3MTQxMzcyOTh9.6sGOB5UNlOGsOqdU8bDHLkTZTULCTtgu5N02c2Czg_Q",
 									"type": "string"
 								}
 							]
@@ -209,7 +209,7 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:5000/users/getProfile/66230a765826cfc3897632f9",
+							"raw": "http://localhost:5000/users/getProfile/6628062856bf242a6d888954",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -218,7 +218,7 @@
 							"path": [
 								"users",
 								"getProfile",
-								"66230a765826cfc3897632f9"
+								"6628062856bf242a6d888954"
 							]
 						},
 						"description": "This is a GET request and it is used to \"get\" data from an endpoint. There is no request body for a GET request, but you can use query parameters to help specify the resource you want data on (e.g., in this request, we have `id=1`).\n\nA successful GET response will have a `200 OK` status, and should include some kind of response body - for example, HTML web content or JSON data."
@@ -304,7 +304,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6InsnJG9pZCc6ICc2NjFmZDQyNDlhOTlhM2ZjNTRmZjBjOTgnfSIsImVtYWlsIjoiaGVyNzcwQHV2Zy5lZHUuZ3QiLCJyb2xlIjoiVVNFUiIsImV4cCI6MTcxMzU5OTM0MX0.lMtgyT8tKkmei96WvrZGhJFhOvvNzkKar3CPYJgugL8",
+									"value": "",
 									"type": "string"
 								}
 							]
@@ -321,7 +321,7 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:5000/users/updatePassword/661fd4249a99a3fc54ff0c98",
+							"raw": "http://localhost:5000/users/updatePassword/66230a765826cfc3897632f9",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -330,7 +330,7 @@
 							"path": [
 								"users",
 								"updatePassword",
-								"661fd4249a99a3fc54ff0c98"
+								"66230a765826cfc3897632f9"
 							]
 						},
 						"description": "This is a PUT request and it is used to overwrite an existing piece of data. For instance, after you create an entity with a POST request, you may want to modify that later. You can do that using a PUT request. You typically identify the entity being updated by including an identifier in the URL (eg. `id=1`).\n\nA successful PUT request typically returns a `200 OK`, `201 Created`, or `204 No Content` response code."
@@ -390,6 +390,131 @@
 							]
 						},
 						"description": "This is a DELETE request, and it is used to delete data that was previously created via a POST request. You typically identify the entity being updated by including an identifier in the URL (eg. `id=1`).\n\nA successful DELETE request typically returns a `200 OK`, `202 Accepted`, or `204 No Content` response code."
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Ingresos",
+			"item": [
+				{
+					"name": "test",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5000/ingresos/test",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"ingresos",
+								"test"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "egresos",
+			"item": [
+				{
+					"name": "test",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5000/egresos/test",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"egresos",
+								"test"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "metas",
+			"item": [
+				{
+					"name": "test",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5000/egresos/test",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"egresos",
+								"test"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "recompensas",
+			"item": [
+				{
+					"name": "test",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5000/egresos/test",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"egresos",
+								"test"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "consejos",
+			"item": [
+				{
+					"name": "test",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5000/egresos/test",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"egresos",
+								"test"
+							]
+						}
 					},
 					"response": []
 				}
