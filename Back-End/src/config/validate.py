@@ -19,9 +19,9 @@ def checkPassword(password, hash):
     
 #funcion para espacion vacios
 def dataRequired(data, required_keys):
-    missing_keys = [key for key in required_keys if key not in data]
+    missing_keys = [key for key in required_keys if key not in data or not data[key]]
     if missing_keys:
         missing_keys_str = ', '.join(missing_keys)
-        message = f"{missing_keys_str} requeridos para completar el proceso"
+        message = f"{missing_keys_str} requeridos"
         return jsonify({"message": message}), 400
     return None

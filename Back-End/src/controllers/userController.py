@@ -33,6 +33,8 @@ def register():
     #encriptar contra
     password=userNew['password']
     userNew['password'] = encrypt(password)
+    #activo inicial
+    userNew['activo'] = 0
     #no se repita email
     if userfind is None: 
         userNew['role'] = 'USER'
