@@ -17,10 +17,14 @@ endpoints_permitidos = ['users.getAll', 'users.delete', 'users.updateProfile', '
 #endpoints_permitidos = []
 @user.before_request
 def verify_token_middleware():
+    token = request.headers.get('Authorization')
+    if not token:
+        response = jsonify({"message": "Token no proporcionado"})
+        response.status_code = 401
+        return response
+    #ensureAtuh
     if request.endpoint in endpoints_permitidos:
-         print("hola")
-         print(request.headers['Authorization'])
-         return ensureAuth(request.headers['Authorization'].split(" ")[1],output=False)
+         return ensureAuth(token.split(" ")[1], output=False)
     #ADMIN
-    if request.endpoint == 'users.jijija':
-        return isAdmin(request.headers['Authorization'].split(" ")[1],output=False)
+    if request.endpoint == ' ':
+        return isAdmin(token.split(" ")[1], output=False)

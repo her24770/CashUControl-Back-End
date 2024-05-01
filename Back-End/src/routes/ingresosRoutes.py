@@ -14,8 +14,14 @@ endpoints_permitidos = ['ingresos.add','ingresos.listIdUser','ingresos.listBySem
 
 @ingresos.before_request
 def verify_token_middleware():
+    token = request.headers.get('Authorization')
+    if not token:
+        response = jsonify({"message": "Token no proporcionado"})
+        response.status_code = 401
+        return response
+    #ensureAtuh
     if request.endpoint in endpoints_permitidos:
-         return ensureAuth(request.headers['Authorization'].split(" ")[1],output=False)
+         return ensureAuth(token.split(" ")[1], output=False)
     #ADMIN
     if request.endpoint == ' ':
-        return isAdmin(request.headers['Authorization'].split(" ")[1],output=False)
+        return isAdmin(token.split(" ")[1], output=False)
