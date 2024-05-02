@@ -6,10 +6,11 @@ egresos = Blueprint('egresos', __name__)
 
 egresos.add_url_rule('/test', view_func=test, methods=['GET'])
 egresos.add_url_rule('/searchByUser/<id>', view_func=searchByUser, methods=['GET'])
+egresos.add_url_rule('/searchBySemester/<id>', view_func=UltimoSemestre, methods=['POST'])
 egresos.add_url_rule('/egreso', view_func=addE, methods=['POST'])
 
 ## rutas con validacion de token
-endpoints_permitidos = []
+endpoints_permitidos = ['egresos.searchBySemester']
 
 @egresos.before_request
 def verify_token_middleware():
