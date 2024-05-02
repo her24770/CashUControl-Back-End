@@ -5,6 +5,8 @@ from config.authenticated import ensureAuth, isAdmin
 egresos = Blueprint('egresos', __name__)
 
 egresos.add_url_rule('/test', view_func=test, methods=['GET'])
+egresos.add_url_rule('/searchByUser/<id>', view_func=searchByUser, methods=['GET'])
+egresos.add_url_rule('/egreso', view_func=addE, methods=['POST'])
 
 ## rutas con validacion de token
 endpoints_permitidos = []
