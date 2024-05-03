@@ -12,18 +12,19 @@ recompensas.add_url_rule('/listare/<id>',view_func=list_rewards_by_user,methods=
 recompensas.add_url_rule('/lis',view_func=list_all_rewards,methods=['GET'])
 
 ## rutas con validacion de token
-endpoints_permitidos = []
+endpoints_permitidos = ['recompensas.add_reward','recompensas.delete_reward','recompensas.update_reward','recompensas.list_rewards_by_user','recompensas.list_all_rewards']
+#endpoints_permitidos = []
 
 @recompensas.before_request
 def verify_token_middleware():
-    token = request.headers.get('Authorization')
-    if not token:
-        response = jsonify({"message": "Token no proporcionado"})
-        response.status_code = 401
-        return response
     #ensureAtuh
     if request.endpoint in endpoints_permitidos:
-         return ensureAuth(token.split(" ")[1], output=False)
+        token = request.headers.get('Authorization')
+        if not token:
+            response = jsonify({"message": "Token no proporcionado"})
+            response.status_code = 401
+            return response
+        return ensureAuth(token.split(" ")[1], output=False)
     #ADMIN
     if request.endpoint == ' ':
         return isAdmin(token.split(" ")[1], output=False)
