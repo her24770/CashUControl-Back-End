@@ -11,7 +11,7 @@ ingresos.add_url_rule('/add', view_func=add, methods=['POST'])
 
 ## rutas con validacion de token
 endpoints_permitidos = ['ingresos.add','ingresos.listIdUser','ingresos.listBySemestre']
-
+#endpoints_permitidos=[]
 @ingresos.before_request
 def verify_token_middleware():
     token = request.headers.get('Authorization')

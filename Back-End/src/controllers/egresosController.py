@@ -53,6 +53,10 @@ def lastSemester(id):
     msg = dataRequired(data, ["year","semestre"])
     if msg: 
         return msg
+    #verificar si existe el user
+    userExist =  mongo.db.users.find_one({'_id': ObjectId(id)})
+    if userExist is None:
+        return jsonify({'message': 'El usuario no existe'})
     #establecer rango de fechas para la busqueda
     if data['semestre'] == 1:
         Fincio = datetime(data['year'], 1, 1)
