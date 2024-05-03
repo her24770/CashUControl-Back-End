@@ -7,7 +7,7 @@ egresos = Blueprint('egresos', __name__)
 egresos.add_url_rule('/test', view_func=test, methods=['GET'])
 egresos.add_url_rule('/searchByUser/<id>', view_func=searchByUser, methods=['GET'])
 egresos.add_url_rule('/allEgresos', view_func=allGastos, methods=['GET'])
-egresos.add_url_rule('/egresosBySemester', view_func=lastSemester, methods=['GET'])
+egresos.add_url_rule('/egresosBySemester/<id>', view_func=lastSemester, methods=['POST'])
 egresos.add_url_rule('/egreso', view_func=addE, methods=['POST'])
 
 ## rutas con validacion de token
