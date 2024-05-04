@@ -38,6 +38,12 @@ def addE():
 
 #funcion para buscar por usuario
 def searchByUser(id): 
+    # Primero, verifica si el usuario existe
+    user = mongo.db.users.find_one({'_id': ObjectId(id)})
+    if user is None:
+        return jsonify({'message':'Usuario no existe'})
+    
+    # Si el usuario existe, entonces busca los egresos relacionados con ese usuario
     egresos = mongo.db.egresos.find({'idUser': ObjectId(id)})
     return Response(json_util.dumps(egresos), mimetype='application/json')
 
