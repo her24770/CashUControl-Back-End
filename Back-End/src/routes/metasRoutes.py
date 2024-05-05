@@ -5,6 +5,10 @@ from config.authenticated import ensureAuth, isAdmin
 metas = Blueprint('metas', __name__)
 
 metas.add_url_rule('/test', view_func=test, methods=['GET'])
+metas.add_url_rule('/add', view_func=add, methods=['POST'])
+metas.add_url_rule('/listIdUser/<id>', view_func=listIdUser, methods=['GET'])
+metas.add_url_rule('/edit/<idMeta>', view_func=edit, methods=['PUT'])
+metas.add_url_rule('/findId/<idMeta>', view_func=findId, methods=['GET'])
 
 ## rutas con validacion de token
 endpoints_permitidos = []
