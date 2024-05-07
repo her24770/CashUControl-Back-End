@@ -27,7 +27,8 @@ def add_reward():
         data['fecha_otorgamiento'] = datetime.fromisoformat(data['fecha_otorgamiento'])
     except ValueError:
         return jsonify({'message': 'Formato de fecha no válido. Utilice el formato ISO (YYYY-MM-DDTHH:MM:SS)'})
-
+    # Convertir idUser en objectID
+    data['id_usuario']=ObjectId(data['id_usuario'])
     # Insertar la nueva recompensa en la base de datos
     mongo.db.rewards.insert_one(data)
 
@@ -56,15 +57,15 @@ def list_rewards_by_user(id):
     return Response(rewards, mimetype='application/json')
 
 # Actualizar una recompensa PUT
-def update_reward(id):
-    data = request.get_json()
+# def update_reward(id):
+#     data = request.get_json()
 
-    # Verificar si la recompensa existe
-    reward = mongo.db.rewards.find_one({'_id': ObjectId(id)})
-    if reward is None:
-        return jsonify({'message': 'Recompensa no encontrada'})
+#     # Verificar si la recompensa existe
+#     reward = mongo.db.rewards.find_one({'_id': ObjectId(id)})
+#     if reward is None:
+#         return jsonify({'message': 'Recompensa no encontrada'})
 
-    # Actualizar la recompensa en la base de datos
-    mongo.db.rewards.update_one({'_id': ObjectId(id)}, {'$set': data})
+#     # Actualizar la recompensa en la base de datos
+#     mongo.db.rewards.update_one({'_id': ObjectId(id)}, {'$set': data})
 
-    return jsonify({'message': 'Recompensa actualizada correctamente'})
+#     return jsonify({'message': 'Recompensa actualizada correctamente'})
