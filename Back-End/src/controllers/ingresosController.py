@@ -21,10 +21,10 @@ def add():
     if userExist is None:
         return jsonify({'message':'Usuario no existe'})
     #permiso si es su usuario o rol ADMIN
-    user = userForToken(request.headers['Authorization'].split(" ")[1])
-    if not user['role'] == 'ADMIN':
-        if not eval(user['id'])['$oid'] == ingresoNew['idUser']:
-            return jsonify({'message':'No tiene autorizado hacer esta acción'})
+    # user = userForToken(request.headers['Authorization'].split(" ")[1])
+    # if not user['role'] == 'ADMIN':
+    #     if not eval(user['id'])['$oid'] == ingresoNew['idUser']:
+    #         return jsonify({'message':'No tiene autorizado hacer esta acción'})
     #actualizar monto de usuarios
     newActivo=userExist['activo']+ingresoNew['monto']
     mongo.db.users.update_one({'_id': ObjectId(ingresoNew['idUser'])},
