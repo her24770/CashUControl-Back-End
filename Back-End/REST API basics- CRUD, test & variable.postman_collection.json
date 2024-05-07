@@ -1045,7 +1045,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6InsnJG9pZCc6ICc2NjMwODRjNjIwNjFiZjA0MWVlZGUwNDInfSIsImVtYWlsIjoiQURNSU4iLCJyb2xlIjoiQURNSU4iLCJleHAiOjE3MTQ4MzY1MTJ9.d_i1pP9ccABLQ-K_C8YLWB8-JHW_JuC4mm7MSr9GoX0",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6InsnJG9pZCc6ICc2NjMwODRjNjIwNjFiZjA0MWVlZGUwNDInfSIsImVtYWlsIjoiQURNSU4iLCJyb2xlIjoiQURNSU4iLCJleHAiOjE3MTUxMjMxMzd9.OM4juvk3ei-7YdpMYb6pORDRnoik1CDLdcGXEE7dS1k",
 									"type": "string"
 								}
 							]
@@ -1054,7 +1054,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n\"id_usuario\":\"6624858d064926ba73cee545\",\r\n\"descripcion\":\"comida\",\r\n\"puntos\":\"12\",\r\n\"fecha_otorgamiento\":\"2023-05-30\"\r\n}\r\n",
+							"raw": "{\r\n\"id_usuario\":\"663084366343ea955f8e4152\",\r\n\"descripcion\":\"comida\",\r\n\"puntos\":\"12\",\r\n\"fecha_otorgamiento\":\"2023-05-30\"\r\n}\r\n",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -1084,7 +1084,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6InsnJG9pZCc6ICc2NjMwODRjNjIwNjFiZjA0MWVlZGUwNDInfSIsImVtYWlsIjoiQURNSU4iLCJyb2xlIjoiQURNSU4iLCJleHAiOjE3MTQ4MzY1MTJ9.d_i1pP9ccABLQ-K_C8YLWB8-JHW_JuC4mm7MSr9GoX0",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6InsnJG9pZCc6ICc2NjMwODRjNjIwNjFiZjA0MWVlZGUwNDInfSIsImVtYWlsIjoiQURNSU4iLCJyb2xlIjoiQURNSU4iLCJleHAiOjE3MTUxMjMxMzd9.OM4juvk3ei-7YdpMYb6pORDRnoik1CDLdcGXEE7dS1k",
 									"type": "string"
 								}
 							]
@@ -1117,7 +1117,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6InsnJG9pZCc6ICc2NjI0ODRkMDQzYmUwYTE5MGNkNjBlMTAnfSIsImVtYWlsIjoiQURNSU4iLCJyb2xlIjoiQURNSU4iLCJleHAiOjE3MTQ2NjM0NDl9.kcO_rl-bKp-BWc5rkfBvWGIG6lgkDbhiyi7KYCe11Jg",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6InsnJG9pZCc6ICc2NjMwODRjNjIwNjFiZjA0MWVlZGUwNDInfSIsImVtYWlsIjoiQURNSU4iLCJyb2xlIjoiQURNSU4iLCJleHAiOjE3MTUxMjMxMzd9.OM4juvk3ei-7YdpMYb6pORDRnoik1CDLdcGXEE7dS1k",
 									"type": "string"
 								}
 							]
@@ -1129,7 +1129,7 @@
 							"formdata": []
 						},
 						"url": {
-							"raw": "http://localhost:5000/recompensas/listare/662485c6064926ba73cee546",
+							"raw": "http://localhost:5000/recompensas/listare/663084366343ea955f8e4152",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -1138,7 +1138,7 @@
 							"path": [
 								"recompensas",
 								"listare",
-								"662485c6064926ba73cee546"
+								"663084366343ea955f8e4152"
 							]
 						}
 					},
