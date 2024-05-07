@@ -13,18 +13,19 @@ user.add_url_rule('/update/<id>',view_func=updateProfile,methods=['PUT'])
 user.add_url_rule('/updatePassword/<id>',view_func=updatePassword,methods=['PUT'])
 
 ## rutas con validacion de token
-endpoints_permitidos = ['users.getAll', 'users.delete', 'users.updateProfile', 'users.getProfile','users.getAll']
-#endpoints_permitidos = []
+#endpoints_permitidos = ['users.getAll', 'users.delete', 'users.updateProfile', 'users.getProfile','users.getAll']
+endpoints_permitidos = []
+
 @user.before_request
 def verify_token_middleware():
-    # token = request.headers.get('Authorization')
-    # if not token:
-    #     response = jsonify({"message": "Token no proporcionado"})
-    #     response.status_code = 401
-    #     return response
-    # #ensureAtuh
+    #ensureAtuh
     if request.endpoint in endpoints_permitidos:
-         return ensureAuth(request.headers.get('Authorization').split(" ")[1], output=False)
+        token = request.headers.get('Authorization')
+        if not token:
+            response = jsonify({"message": "Token no proporcionado"})
+            response.status_code = 401
+            return response
+        return ensureAuth(request.headers.get('Authorization').split(" ")[1], output=False)
     
     #ADMIN
     if request.endpoint == ' ':

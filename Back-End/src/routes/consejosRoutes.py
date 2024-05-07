@@ -12,7 +12,8 @@ consejos.add_url_rule('/listByCategoria/<categoria>', view_func=list_ByCategoria
 consejos.add_url_rule('/listByUser/<id>', view_func=list_ByUser, methods=['GET'])
 
 ## rutas con validacion de token
-endpoints_permitidos = ["consejos.get_consejos","consejos.delete_consejos","consejos.list_all_consejos","consejos.list_ByCategoria","consejos.list_ByUser"]
+#endpoints_permitidos = ["consejos.get_consejos","consejos.delete_consejos","consejos.list_all_consejos","consejos.list_ByCategoria","consejos.list_ByUser"]
+endpoints_permitidos=[]
 
 @consejos.before_request
 def verify_token_middleware():

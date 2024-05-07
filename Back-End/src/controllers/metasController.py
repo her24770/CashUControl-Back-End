@@ -37,6 +37,10 @@ def edit(idMeta):
     msg = dataRequired(metaNew, ["tipo","monto","dateObjetivo"])
     if msg: 
         return msg 
+    #validar que exista el usuario
+    metaExist = mongo.db.metas.find_one({'_id': ObjectId(idMeta)})
+    if metaExist is None:
+        return jsonify({'message':'Meta no existe'})
     #permiso si es su usuario o rol ADMIN
     # user = userForToken(request.headers['Authorization'].split(" ")[1])
     # if not user['role'] == 'ADMIN':

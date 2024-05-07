@@ -11,8 +11,9 @@ egresos.add_url_rule('/egresosBySemester/<id>', view_func=lastSemester, methods=
 egresos.add_url_rule('/egreso', view_func=addE, methods=['POST'])
 
 ## rutas con validacion de token
-endpoints_permitidos = ['egresos.searchByUser','egresos.allGastos','egresos.lastSemester','egresos.addE']
-#endpoints_permitidos = []
+#endpoints_permitidos = ['egresos.searchByUser','egresos.allGastos','egresos.lastSemester','egresos.addE']
+endpoints_permitidos = []
+
 @egresos.before_request
 def verify_token_middleware():
     

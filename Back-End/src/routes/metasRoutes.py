@@ -11,8 +11,8 @@ metas.add_url_rule('/edit/<idMeta>', view_func=edit, methods=['PUT'])
 metas.add_url_rule('/findId/<idMeta>', view_func=findId, methods=['GET'])
 
 ## rutas con validacion de token
-endpoints_permitidos = ['metas.add','metas.listIdUser','metas.edit','metas.findId']
-#endpoints_permitidos = []
+#endpoints_permitidos = ['metas.add','metas.listIdUser','metas.edit','metas.findId']
+endpoints_permitidos = []
 
 @metas.before_request
 def verify_token_middleware():
