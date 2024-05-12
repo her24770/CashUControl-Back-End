@@ -16,7 +16,7 @@ consejos.add_url_rule('/like/<id>', view_func=like_consejo, methods=['POST'])
 consejos.add_url_rule('/unlike/<id>', view_func=unlike_consejo, methods=['POST'])
 
 ## rutas con validacion de token
-endpoints_permitidos = ["consejos.get_consejos","consejos.delete_consejos","consejos.list_all_consejos","consejos.list_ByCategoria","consejos.list_ByUser"]
+endpoints_permitidos = ["consejos.get_consejos","consejos.delete_consejos","consejos.list_ByCategoria","consejos.list_ByUser"]
 
 @consejos.before_request
 def verify_token_middleware():
