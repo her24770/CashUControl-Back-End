@@ -9,6 +9,7 @@ metas.add_url_rule('/add', view_func=add, methods=['POST'])
 metas.add_url_rule('/listIdUser/<id>', view_func=listIdUser, methods=['GET'])
 metas.add_url_rule('/edit/<idMeta>', view_func=edit, methods=['PUT'])
 metas.add_url_rule('/findId/<idMeta>', view_func=findId, methods=['GET'])
+metas.add_url_rule('/eliminar/<id>',view_func=deleted, methods=['DELETE'])
 
 ## rutas con validacion de token
 #endpoints_permitidos = ['metas.add','metas.listIdUser','metas.edit','metas.findId']

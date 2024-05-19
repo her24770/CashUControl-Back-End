@@ -81,3 +81,14 @@ def findId(idMeta):
     #         return jsonify({'message':'No tiene autorizado hacer esta acción'})
         
     return Response(json_util.dumps(meta), mimetype='application/json')
+
+def deleted(id):
+    # Verificar si la recompensa existe
+    reward = mongo.db.metas.find_one({'_id': ObjectId(id)})
+    if reward is None:
+        return jsonify({'message': 'Meta no encontrada'})
+
+    # Eliminar la recompensa de la base de datos
+    mongo.db.metas.delete_one({'_id': ObjectId(id)})
+
+    return jsonify({'message': 'Meta eliminada correctamente'})
