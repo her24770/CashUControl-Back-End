@@ -22,8 +22,20 @@ def add_consejos():
     #agregar
     data['id_usuario']=ObjectId(data['id_usuario'])
     data['fecha']= datetime.fromisoformat(data['fecha'])
+    data['likes'] = 0
     mongo.db.consejos.insert_one(data)
     return jsonify({'message': 'Add successfully'})
+
+# Función para incrementar el valor de likes de un consejo
+def like_consejo(id):
+    # Encuentra el consejo por su ID y actualiza el valor de likes incrementándolo en 1
+    mongo.db.consejos.update_one({'_id': ObjectId(id)}, {'$inc': {'likes': 1}})
+    return jsonify({'message': 'Like agregado exitosamente'})
+
+def unlike_consejo(id):
+    # Encuentra el consejo por su ID y actualiza el valor de likes decrementándolo en 1
+    mongo.db.consejos.update_one({'_id': ObjectId(id)}, {'$inc': {'likes': -1}})
+    return jsonify({'message': 'Like eliminado exitosamente'})
 
 def delete_consejo(id):
     consejo = mongo.db.consejos.find_one({'_id': ObjectId(id)})
