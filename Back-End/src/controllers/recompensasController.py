@@ -34,7 +34,7 @@ def add_reward():
 
     return jsonify({'message': 'Recompensa agregada correctamente'})
 
-# Eliminar una recompensa DELETE
+# Eliminar una recompensa DELETE adas
 def delete_reward(id):
     # Verificar si la recompensa existe
     reward = mongo.db.rewards.find_one({'_id': ObjectId(id)})
