@@ -1,0 +1,8 @@
+Flask[async]
+PyJWT 
+python-dotenv 
+flask-pymongo 
+flask 
+pymongo 
+bcrypt 
+flask-cors
