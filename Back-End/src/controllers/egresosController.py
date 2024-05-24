@@ -73,7 +73,7 @@ def lastSemester(id):
     else:
         jsonify({'message': 'Semestre invalido'})
     #hacer busqueda entre fechas
-    ingresos = mongo.db.ingresos.find({
+    ingresos = mongo.db.egresos.find({
         'idUser': ObjectId(id),
         'date': {'$gte': Fincio, '$lte': Ffinal}
     })
