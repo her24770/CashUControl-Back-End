@@ -67,11 +67,11 @@ def updateProfile(id):
         if not userEmail is None:
             return jsonify({'message:':'Email ya esta en uso'})
     #validar permisos de admin y actualizacion de perfil propio para usuario y cambio de rol
-    user = userForToken(request.headers['Authorization'].split(" ")[1])
-    if not user['role'] == 'ADMIN':
-        dataUpdate['role'] = userExist['role']
-        if not eval(user['id'])['$oid'] == id:
-            return jsonify({'message':'No tiene autorizado hacer esta acción'})
+    # user = userForToken(request.headers['Authorization'].split(" ")[1])
+    # if not user['role'] == 'ADMIN':
+    #     dataUpdate['role'] = userExist['role']
+    #     if not eval(user['id'])['$oid'] == id:
+    #         return jsonify({'message':'No tiene autorizado hacer esta acción'})
     #actualizar usuario
     mongo.db.users.update_one({'_id': ObjectId(id)},
                                 {'$set': {
@@ -91,9 +91,9 @@ def updatePassword(id):
     if userExist is None:
         return jsonify({'message':'Usuario no existe'})
     #validar permisos de admin y actualizacion de perfil propio para usuario
-    user = userForToken(request.headers['Authorization'].split(" ")[1])
-    if not eval(user['id'])['$oid'] == id:
-        return jsonify({'message':'No tiene autorizado hacer esta acción'})
+    # user = userForToken(request.headers['Authorization'].split(" ")[1])
+    # if not eval(user['id'])['$oid'] == id:
+    #     return jsonify({'message':'No tiene autorizado hacer esta acción'})
     #validar campos vacios
     msg = dataRequired(dataUpdate, ['newPassword', 'password'])
     if msg: 
